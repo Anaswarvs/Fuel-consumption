@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VEHICLE GAS EMISSION PREDICTION</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .card {
+            margin-top: 50px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .btn-primary {
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .alert {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h2 class="text-center">Vehicle Data Prediction</h2>
+            <form method="POST" action="/predict">
+                <div class="form-group">
+                    <label for="engine-size">Engine Size</label>
+                    <input type="number" step="0.01" class="form-control" id="engine-size" name="ENGINE SIZE" placeholder="Enter Engine Size (e.g., 2.5)" required>
+                </div>
+                <div class="form-group">
+                    <label for="cylinders">Cylinders</label>
+                    <input type="number" class="form-control" id="cylinders" name="CYLINDERS" placeholder="Enter Number of Cylinders" required>
+                </div>
+                <div class="form-group">
+                    <label for="fuel-consumption">Fuel Consumption</label>
+                    <input type="number" step="0.01" class="form-control" id="fuel-consumption" name="FUEL CONSUMPTION" placeholder="Enter Fuel Consumption (e.g., 8.5)" required>
+                </div>
+                <div class="form-group">
+                    <label for="hwy">Highway Consumption (L/100 km)</label>
+                    <input type="number" step="0.01" class="form-control" id="hwy" name="HWY (L/100 km)" placeholder="Enter Highway Consumption" required>
+                </div>
+                <div class="form-group">
+                    <label for="comb-l">Combined Consumption (L/100 km)</label>
+                    <input type="number" step="0.01" class="form-control" id="comb-l" name="COMB (L/100 km)" placeholder="Enter Combined Consumption (L/100 km)" required>
+                </div>
+                <div class="form-group">
+                    <label for="comb-mpg">Combined Consumption (mpg)</label>
+                    <input type="number" step="0.01" class="form-control" id="comb-mpg" name="COMB (mpg)" placeholder="Enter Combined Consumption (mpg)" required>
+                </div>
+                <div class="form-group">
+                    <label for="transmission">Transmission Category</label>
+                    <select class="form-control" id="transmission" name="Transmission_Category" required>
+                        <option value="" disabled selected>Select Transmission Category</option>
+                        <option value="0">Manual</option>
+                        <option value="1">Automatic</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="vehicle-class">Vehicle Class Category</label>
+                    <select class="form-control" id="vehicle-class" name="Vehicle Class Category" required>
+                        <option value="" disabled selected>Select Vehicle Class Category</option>
+                        <option value="0">Compact</option>
+                        <option value="1">SUV</option>
+                        <option value="2">Sedan</option>
+                        <!-- Add other categories as needed -->
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Predict</button>
+            </form>
+
+            {% if prediction %}
+                <div class="alert alert-success text-center mt-4">
+                    <strong>Predicted Value:</strong> {{ prediction }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
